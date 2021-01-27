@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"time"
 
-	messages "github.com/korjavin/pbuf-example/messages"
+	messages "github.com/Reallife/pbuf-example/internal/pkg/messages"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )

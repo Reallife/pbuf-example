@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-import "messages/text.proto";
+import "internal/pkg/messages/text.proto";
 
 package state;
-option go_package = "github.com/korjavin/pbuf-example/state;state";
+option go_package = "github.com/Reallife/pbuf-example/internal/pkg/state;state";
 
 message State{
   map<string,ListOfPosts> posts            = 1; // key = account

@@ -1,10 +1,10 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
-import "messages/message.proto";
+import "internal/pkg/messages/message.proto";
 
 package services;
-option go_package = "github.com/korjavin/pbuf-example/services;services";
+option go_package = "github.com/Reallife/pbuf-example/internal/pkg/services;services";
 
 message Directs {
   repeated messages.Direct direct = 1;

@@ -18,4 +18,4 @@ RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/i
 
 
 WORKDIR /app
-ADD build.sh /
+ADD scripts/build.sh /scripts/build.sh

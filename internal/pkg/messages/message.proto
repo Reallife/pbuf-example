@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package messages;
-option go_package = "github.com/korjavin/pbuf-example/messages;messages";
+option go_package = "github.com/Reallife/pbuf-example/internal/pkg/messages;messages";
 
 message Direct {
   string account = 1;

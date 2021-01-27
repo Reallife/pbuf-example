@@ -4,8 +4,8 @@ import (
 	"context"
 	"log"
 
-	"github.com/korjavin/pbuf-example/messages"
-	"github.com/korjavin/pbuf-example/services"
+	"github.com/Reallife/pbuf-example/internal/pkg/messages"
+	"github.com/Reallife/pbuf-example/internal/pkg/services"
 	"google.golang.org/grpc"
 )
 

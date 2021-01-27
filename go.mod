@@ -1,4 +1,4 @@
-module github.com/korjavin/pbuf-example
+module github.com/Reallife/pbuf-example
 
 go 1.15
 
