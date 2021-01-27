@@ -10,8 +10,11 @@ RUN GO111MODULE=on GOBIN=/usr/local/bin go get \
 
 RUN apt update && apt install -y unzip
 RUN PB_REL="https://github.com/protocolbuffers/protobuf/releases" && \
- curl -LO $PB_REL/download/v3.13.0/protoc-3.13.0-linux-x86_64.zip && \
- unzip protoc-3.13.0-linux-x86_64.zip -d /protoc
+    PB_ZIP="protoc-3.13.0-linux-x86_64.zip" && \
+ curl -LO $PB_REL/download/v3.13.0/$PB_ZIP && \
+ unzip -o $PB_ZIP -d /usr/local bin/protoc && \
+ unzip -o $PB_ZIP -d /usr/local 'include/*' && \
+ chmod o+x /usr/local/bin/protoc
 
 RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.31.0 && \
     mv ./bin/golangci-lint /usr/local/bin
