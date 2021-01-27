@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"time"
 
-	messages "github.com/Reallife/pbuf-example/api/messages"
+	messages "github.com/Reallife/pbuf-example/api/messages/v1"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
@@ -24,7 +24,7 @@ func main() {
 	rand.Seed(time.Now().Unix())
 	for _, account := range []string{"Alice", "Bob", "Charlie", "Daemon"} {
 		text := texts[rand.Intn(len(texts))]
-		m := messages.Direct{
+		m := messages.DirectMessage{
 			Account: account,
 			Text:    text,
 		}
