@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package messages;
-option go_package = "github.com/Reallife/pbuf-example/internal/pkg/messages;messages";
-
-message Text{
-  string text     = 1;
-  int64 publishAt = 2;
-}

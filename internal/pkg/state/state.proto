@@ -1,30 +1,23 @@
 syntax = "proto3";
 
-import "internal/pkg/messages/text.proto";
+import "internal/pkg/messages/message.proto";
+import "internal/pkg/messages/post.proto";
 
 package state;
 option go_package = "github.com/Reallife/pbuf-example/internal/pkg/state;state";
 
 message State{
-  map<string,ListOfPosts> posts            = 1; // key = account
-  repeated messages.Text scheduledMessages = 2;
-  map<string,ListOfDirects> directMessages = 3; //key = accountTO
+  map<string, ListOfPosts> posts = 1; // key = account
+  repeated messages.Post scheduledPosts = 2;
+  map<string, ListOfDirects> directMessages = 3; //key = toUserID
 }
 
 message ListOfPosts {
-  repeated Post posts = 1;
-}
-
-message Post {
-  int64 timestamp = 1;
-  string text     = 2;
+  repeated messages.Post posts = 1;
 }
 
 message ListOfDirects {
-  repeated Direct directs = 1;
+  repeated messages.DirectMessage directs = 1;
 }
 
-message Direct {
-  string from = 1;
-  string text = 2;
-}
+
