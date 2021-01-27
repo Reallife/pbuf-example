@@ -4,7 +4,7 @@ package services
 
 import (
 	context "context"
-	messages "github.com/Reallife/pbuf-example/internal/pkg/messages"
+	v1 "github.com/Reallife/pbuf-example/api/messages/v1"
 	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -21,7 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MessagesAPIClient interface {
 	GetDirectMessages(ctx context.Context, in *User, opts ...grpc.CallOption) (*DirectMessages, error)
-	SendDirectMessages(ctx context.Context, in *messages.DirectMessage, opts ...grpc.CallOption) (*empty.Empty, error)
+	SendDirectMessages(ctx context.Context, in *v1.DirectMessage, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type messagesAPIClient struct {
@@ -41,7 +41,7 @@ func (c *messagesAPIClient) GetDirectMessages(ctx context.Context, in *User, opt
 	return out, nil
 }
 
-func (c *messagesAPIClient) SendDirectMessages(ctx context.Context, in *messages.DirectMessage, opts ...grpc.CallOption) (*empty.Empty, error) {
+func (c *messagesAPIClient) SendDirectMessages(ctx context.Context, in *v1.DirectMessage, opts ...grpc.CallOption) (*empty.Empty, error) {
 	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/services.MessagesAPI/SendDirectMessages", in, out, opts...)
 	if err != nil {
@@ -55,7 +55,7 @@ func (c *messagesAPIClient) SendDirectMessages(ctx context.Context, in *messages
 // for forward compatibility
 type MessagesAPIServer interface {
 	GetDirectMessages(context.Context, *User) (*DirectMessages, error)
-	SendDirectMessages(context.Context, *messages.DirectMessage) (*empty.Empty, error)
+	SendDirectMessages(context.Context, *v1.DirectMessage) (*empty.Empty, error)
 	mustEmbedUnimplementedMessagesAPIServer()
 }
 
@@ -66,7 +66,7 @@ type UnimplementedMessagesAPIServer struct {
 func (UnimplementedMessagesAPIServer) GetDirectMessages(context.Context, *User) (*DirectMessages, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDirectMessages not implemented")
 }
-func (UnimplementedMessagesAPIServer) SendDirectMessages(context.Context, *messages.DirectMessage) (*empty.Empty, error) {
+func (UnimplementedMessagesAPIServer) SendDirectMessages(context.Context, *v1.DirectMessage) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendDirectMessages not implemented")
 }
 func (UnimplementedMessagesAPIServer) mustEmbedUnimplementedMessagesAPIServer() {}
@@ -101,7 +101,7 @@ func _MessagesAPI_GetDirectMessages_Handler(srv interface{}, ctx context.Context
 }
 
 func _MessagesAPI_SendDirectMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(messages.DirectMessage)
+	in := new(v1.DirectMessage)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -113,7 +113,7 @@ func _MessagesAPI_SendDirectMessages_Handler(srv interface{}, ctx context.Contex
 		FullMethod: "/services.MessagesAPI/SendDirectMessages",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MessagesAPIServer).SendDirectMessages(ctx, req.(*messages.DirectMessage))
+		return srv.(MessagesAPIServer).SendDirectMessages(ctx, req.(*v1.DirectMessage))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -135,5 +135,5 @@ var MessagesAPI_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "internal/pkg/services/api.proto",
+	Metadata: "api/services/v1/api.proto",
 }

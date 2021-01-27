@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 
 package messages;
-option go_package = "github.com/Reallife/pbuf-example/internal/pkg/messages;messages";
+option go_package = "github.com/Reallife/pbuf-example/api/messages/v1;messages";
 
 message Post{
   string id = 1;
