@@ -1,7 +1,7 @@
 #!/bin/bash
-export PATH="$PATH:/protoc/bin"
+ls -la /usr/local/bin
 BUFDIR=$(mktemp -d -t buf-XXXXXXXXXX)
 buf build -o image.bin
 protoc --descriptor_set_in=image.bin --go_out=$BUFDIR --go-grpc_out=$BUFDIR  $(buf ls-files --input image.bin)
-cp -r $BUFDIR/github.com/korjavin/pbuf-example/* ./
+cp -r $BUFDIR/github.com/Reallife/pbuf-example/* ./
 rm -rf $BUFDIR

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package messages;
+option go_package = "github.com/Reallife/pbuf-example/api/messages/v1;messages";
+
+message DirectMessage {
+  string id = 1;
+  string fromUserID = 2;
+  string toUserID = 3;
+  string content = 4;
+  google.protobuf.Timestamp sentAt = 5;
+  bool wasRead = 6;
+}

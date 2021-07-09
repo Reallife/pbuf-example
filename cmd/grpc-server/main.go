@@ -9,8 +9,8 @@ import (
 	empty "github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc"
 
-	"github.com/korjavin/pbuf-example/messages"
-	"github.com/korjavin/pbuf-example/services"
+	"github.com/Reallife/pbuf-example/api/messages/v1"
+	"github.com/Reallife/pbuf-example/api/services/v1"
 )
 
 type Server struct {
@@ -24,18 +24,18 @@ func NewServer() *Server {
 	}
 }
 
-func (s *Server) GetDirectMessages(ctx context.Context, in *services.Account) (*services.Directs, error) {
+func (s *Server) GetDirectMessages(ctx context.Context, in *services.User) (*services.DirectMessages, error) {
 	// TODO handle errors and nils and concurency
-	msgs, ok := s.queue[in.Account]
+	msgs, ok := s.queue[in.Id]
 	if !ok {
 		return nil, nil
 	}
-	answer := &services.Directs{
-		Direct: make([]*messages.Direct, len(msgs)),
+	answer := &services.DirectMessages{
+		Direct: make([]*messages.DirectMessage, len(msgs)),
 	}
 	for i, message := range msgs {
-		answer.Direct[i] = &messages.Direct{
-			Account: in.Account, // TODO must be from
+		answer.Direct[i] = &messages.DirectMessage{
+			Account: in.Id, // TODO must be from
 			Text:    message,
 		}
 	}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "api/messages/v1/message.proto";
+
+package services;
+option go_package = "github.com/Reallife/pbuf-example/api/services/v1;services";
+
+message DirectMessages {
+  repeated messages.DirectMessage direct = 1;
+}
+
+message User {
+  string id = 1;
+  string username = 2;
+  google.protobuf.Timestamp registeredAt = 3;
+}
+
+service MessagesAPI {
+  rpc GetDirectMessages(User) returns (DirectMessages) {}
+  rpc SendDirectMessages(messages.DirectMessage) returns (google.protobuf.Empty) {}
+  //TODO
+  //rpc SubscribeDirectMessages(Account) returns (stream messages.Direct) {}
+}
+

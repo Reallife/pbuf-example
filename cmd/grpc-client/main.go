@@ -4,8 +4,8 @@ import (
 	"context"
 	"log"
 
-	"github.com/korjavin/pbuf-example/messages"
-	"github.com/korjavin/pbuf-example/services"
+	"github.com/Reallife/pbuf-example/api/messages/v1"
+	"github.com/Reallife/pbuf-example/api/services/v1"
 	"google.golang.org/grpc"
 )
 
@@ -25,14 +25,14 @@ func main() {
 	account := "alice"
 	for _, msg := range []string{"Hi", "What's up"} {
 		// TODO err handling
-		client.SendDirectMessages(context.Background(), &messages.Direct{
+		client.SendDirectMessages(context.Background(), &messages.DirectMessage{
 			Account: account,
 			Text:    msg,
 		})
 	}
 
 	// get some
-	msgs, _ := client.GetDirectMessages(context.Background(), &services.Account{
+	msgs, _ := client.GetDirectMessages(context.Background(), &services.User{
 		Account: account,
 	})
 	for _, msg := range msgs.Direct {

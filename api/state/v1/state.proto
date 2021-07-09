@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "api/messages/v1/message.proto";
+import "api/messages/v1/post.proto";
+
+package state;
+option go_package = "github.com/Reallife/pbuf-example/api/state/v1;state";
+
+message State{
+  map<string, ListOfPosts> posts = 1; // key = account
+  repeated messages.Post scheduledPosts = 2;
+  map<string, ListOfDirects> directMessages = 3; //key = toUserID
+}
+
+message ListOfPosts {
+  repeated messages.Post posts = 1;
+}
+
+message ListOfDirects {
+  repeated messages.DirectMessage directs = 1;
+}
+
+

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package messages;
+option go_package = "github.com/Reallife/pbuf-example/api/messages/v1;messages";
+
+message Post{
+  string id = 1;
+  string authorID = 2;
+  string content = 3;
+  bool published = 4;
+  google.protobuf.Timestamp publishedAt = 5;
+}

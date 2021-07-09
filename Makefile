@@ -7,4 +7,4 @@ build-docker:
 
 BUFDIR = "/tmp/buf-generate"
 pbuf: build-docker
-	 docker run --rm -v $(PWD):/app builder /build.sh
+	 docker run --rm --user "$(shell id -u):$(shell id -g)" -v $(PWD):/app builder /scripts/build.sh
